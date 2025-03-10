@@ -142,13 +142,8 @@ function Windows10 {
 
     #Restart Explorer and delete the layout file
     Stop-Process -Name explorer -Force
-
-    # Uncomment the next line to make clean start menu default for all new users
-    #Import-StartLayout -LayoutPath $layoutFile -MountPath $env:SystemDrive\
-
     Remove-Item $layoutFile
 }
-
 $version = [System.Environment]::OSVersion.Version
 if ($version.Major -eq 10 -and $version.Build -ge 22000) {
     Windows11

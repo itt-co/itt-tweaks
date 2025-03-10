@@ -25,5 +25,4 @@ Start-Sleep -Seconds 1
 if (-not (Get-Process -Name explorer -ErrorAction SilentlyContinue)) {
     Start-Process explorer.exe -Verb RunAs
 }
-
 Write-Host "[√] Taskbar cleanup completed!"
