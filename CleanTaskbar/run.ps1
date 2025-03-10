@@ -17,4 +17,13 @@ foreach ($Item in $Registry) {
         Write-Host "[x] Failed to apply $($Item.Name): $_"
     }
 }
+
+
+Write-Host "[+] Restart explorer."
+Stop-Process -Name explorer -Force
+Start-Sleep -Seconds 1
+if (-not (Get-Process -Name explorer -ErrorAction SilentlyContinue)) {
+    Start-Process explorer.exe -Verb RunAs
+}
+
 Write-Host "[√] Taskbar cleanup completed!"
