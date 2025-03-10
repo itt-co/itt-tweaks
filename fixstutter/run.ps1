@@ -4,12 +4,10 @@ $files = @(
     "C:\Windows\System32\Windows.Gaming.UI.GameBar.dll"
 )
 
-$result
 foreach ($file in $files) 
 {
     if (Test-Path $file)
     {
-        $result = $file
         takeown /f $file
         ICACLS $file /grant administrators:F
         timeout /T 2 /NOBREAK > $null
@@ -21,10 +19,4 @@ foreach ($file in $files)
         Clear-Host
         Write-Host "Already been fixed"
     }
-}
-
-timeout /T 2 /NOBREAK > $null
-if($result)
-{
-    Write-Host "[+] Successfully fixed. Enjoy a smooth gaming experience!"
 }
