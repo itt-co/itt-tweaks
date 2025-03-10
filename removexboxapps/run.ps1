@@ -1,5 +1,4 @@
 $AppxPackages = @(
-
     "Microsoft.XboxApp",
     "Microsoft.Xbox.TCUI",
     "Microsoft.XboxGamingOverlay",
@@ -7,7 +6,6 @@ $AppxPackages = @(
     "Microsoft.XboxIdentityProvider",
     "Microsoft.XboxSpeechToTextOverlay"
 )
-
 foreach ($name in $AppxPackages) {
     Write-Host "[i] Attempting to remove $name"
     try {
