@@ -1,4 +1,4 @@
-$Registry = @(
+$RegistryItems = @(
     @{
         Path         = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Feeds"
         Name         = "ShellFeedsTaskbarViewMode"
@@ -36,4 +36,4 @@ $Registry = @(
     }
 )
 
-Applying-Tweaks -RegistryItems $Registry
+Applying-Tweaks -RegistryItems $RegistryItems
