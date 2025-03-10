@@ -79,6 +79,11 @@ $AppxPackages = @(
     "Microsoft.NetworkSpeedTest"
 )
 
+$RegistryChanges = @(
+    @{ Path = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer"; Name = "NoStartMenuMorePrograms"; Type = "DWord"; Value = 2 },
+    @{ Path = "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer"; Name = "NoStartMenuMorePrograms"; Type = "DWord"; Value = 2 }
+)
+
 foreach ($name in $AppxPackages) {
     Write-Host "[i] Attempting to remove $name"
     try {
@@ -87,6 +92,11 @@ foreach ($name in $AppxPackages) {
     } catch {
         Write-Host "[x] PLEASE USE (WINDOWS POWERSHELL) NOT (TERMINAL POWERSHELL 7) TO UNINSTALL"
     }
+}
+
+foreach ($Reg in $RegistryChanges) {
+    Write-Host "[+] Modifying registry: $($Reg.Path) - $($Reg.Name)"
+    Set-ItemProperty -Path $Reg.Path -Name $Reg.Name -Value $Reg.Value -Type $Reg.Type
 }
 
 Write-Host '[i] AppxPackage removal completed'
