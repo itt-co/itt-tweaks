@@ -12,4 +12,4 @@ DISM /Online /Cleanup-Image /Restorehealth
 Write-Host '[+] SFC again to verify repairs...' 
 sfc /scannow
 
-Write-Host '[+] System health check completed' 
+Write-Host '[√] System health check completed' 
