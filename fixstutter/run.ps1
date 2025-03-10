@@ -15,7 +15,6 @@ foreach ($file in $files)
         $newName = "$file[emadadel4].bak"
         Rename-Item $file $newName
     }else {
-
         Write-Host "[+] Alredy fixed."
     }
 }
