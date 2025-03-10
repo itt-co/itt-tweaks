@@ -8,12 +8,14 @@ foreach ($file in $files)
 {
     if (Test-Path $file)
     {
+        Write-Host "[+] Renameing $file."
         takeown /f $file
         ICACLS $file /grant administrators:F
         timeout /T 2 /NOBREAK > $null
         $newName = "$file[emadadel4].bak"
         Rename-Item $file $newName
+    }else {
+
+        Write-Host "[+] Alredy fixed."
     }
 }
-
-Write-Host "[+] Done."
