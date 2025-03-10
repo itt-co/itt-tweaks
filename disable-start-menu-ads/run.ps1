@@ -13,8 +13,6 @@ foreach ($Item in $Registry) {
         Write-Host "[x] Failed to apply $($Item.Name): $_"
     }
 }
-
-
 Write-Host "[+] Restart explorer."
 Stop-Process -Name explorer -Force
 Start-Sleep -Seconds 1
