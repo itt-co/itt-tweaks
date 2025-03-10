@@ -1,3 +1,4 @@
+Disable-MMAgent -MemoryCompression | Out-Null
 $files = @("C:\Windows\System32\GameBarPresenceWriter.exe","C:\Windows\System32\GameBarPresenceWriter.proxy.dll","C:\Windows\System32\Windows.Gaming.UI.GameBar.dll")
 foreach ($file in $files) 
 {
