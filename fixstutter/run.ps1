@@ -3,7 +3,7 @@ foreach ($file in $files)
 {
     if (Test-Path $file)
     {
-        Write-Host "[+] Renameing $file."
+        Write-Host "[+] Renameing $file..."
         takeown /f $file
         ICACLS $file /grant administrators:F
         timeout /T 2 /NOBREAK > $null
