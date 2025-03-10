@@ -1,3 +1,5 @@
+Disable-MMAgent -MemoryCompression | Out-Null
+
 $AppxPackages = @(
     "Microsoft.XboxApp",
     "Microsoft.Xbox.TCUI",
