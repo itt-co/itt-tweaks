@@ -5,7 +5,6 @@ $Registry = @(
     @{ Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"; Name = "HideSCAMeetNow"; Type = "DWord"; Value = 1 },
     @{ Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"; Name = "NoNewsAndInterests"; Type = "DWord"; Value = 1 }
 )
-
 foreach ($Item in $Registry) {
     Write-Host "[+] Applying $($Item.Name) to $($Item.Path)"
     try {
@@ -18,5 +17,4 @@ foreach ($Item in $Registry) {
         Write-Host "[x] Failed to apply $($Item.Name): $_"
     }
 }
-
 Write-Host "[√] Taskbar cleanup completed!"
