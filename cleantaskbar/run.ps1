@@ -6,13 +6,12 @@ $Registry = @(
     @{ Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"; Name = "NoNewsAndInterests"; Type = "DWord"; Value = 1 }
 )
 foreach ($Item in $Registry) {
-    Write-Host "[+] Applying $($Item.Name) to $($Item.Path)"
+    Write-Host "[+] Optmize $($Item.Name)"
     try {
         if (-not (Test-Path $Item.Path)) {
             New-Item -Path $Item.Path -Force | Out-Null
         }
         Set-ItemProperty -Path $Item.Path -Name $Item.Name -Value $Item.Value -Type $Item.Type
-        Write-Host "[√] Applied: $($Item.Name)"
     } catch {
         Write-Host "[x] Failed to apply $($Item.Name): $_"
     }
