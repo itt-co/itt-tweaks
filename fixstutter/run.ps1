@@ -15,3 +15,5 @@ foreach ($file in $files)
         Rename-Item $file $newName
     }
 }
+
+Write-Host "[+] Done."
