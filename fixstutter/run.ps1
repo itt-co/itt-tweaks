@@ -5,7 +5,8 @@ $files = @(
 )
 
 $result
-foreach ($file in $files) {
+foreach ($file in $files) 
+{
     if (Test-Path $file)
     {
         $result = $file
