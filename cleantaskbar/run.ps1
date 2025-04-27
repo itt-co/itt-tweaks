@@ -1,65 +1,24 @@
-function Start-Spinner {
-    param(
-        [Parameter(Mandatory)]
-        [string]$Message,
+Write-Host '[i] This may take a few minutes'
 
-        [Parameter(Mandatory)]
-        [ScriptBlock]$Action
-    )
+if (!(Test-Path 'HKU:\')) {New-PSDrive -PSProvider Registry -Name HKU -Root HKEY_USERS | Out-Null}
 
-    $spinnerFrames = @('/', '-', '\', '|')
-    $frameIndex = 0
-
-    $Action.Invoke()
-
-    while ($true) {
-        $frame = $spinnerFrames[$frameIndex++ % $spinnerFrames.Count]
-        Write-Host -NoNewline "`r[ $frame ] $Message"
-        Start-Sleep -Milliseconds 100
-    }
-
-    Write-Host "`r[√] $Message"
-}
-
-
-Write-Host "[+] Restarting Explorer..."
-
-Stop-Process -Name explorer -Force
-Start-Sleep -Seconds 2
-if (-not (Get-Process -Name explorer -ErrorAction SilentlyContinue)) {
-    Start-Process explorer.exe -Verb RunAs
-}
-
-# --------------------------------------------------
-# Main Script
-# --------------------------------------------------
-
-#Write-Host '[i] This may take a few minutes'
-
-Start-Spinner -Message 'Optmize taskbar.....' -Action {
-
-    if (!(Test-Path 'HKU:\')) {
-        New-PSDrive -PSProvider Registry -Name HKU -Root HKEY_USERS | Out-Null
-    }
-
-    New-Item -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests" -Force | Out-Null
-    New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests" -Name "value" -PropertyType "DWord" -Value 0 -Force | Out-Null
-    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Force | Out-Null
-    New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -PropertyType "DWord" -Value 0 -Force | Out-Null
-    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Force | Out-Null
-    New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -PropertyType "DWord" -Value 0 -Force | Out-Null
-    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Force | Out-Null
-    New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowCortanaButton" -PropertyType "DWord" -Value 0 -Force | Out-Null
-    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Force | Out-Null
-    New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoNewsAndInterests" -PropertyType "DWord" -Value 1 -Force | Out-Null
-    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Force | Out-Null
-    New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "HideSCAMeetNow" -PropertyType "DWord" -Value 1 -Force | Out-Null
-    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Force | Out-Null
-    New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -PropertyType "DWord" -Value 1 -Force | Out-Null
-    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Force | Out-Null
-    New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -PropertyType "DWord" -Value 1 -Force | Out-Null
-    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Force | Out-Null
-    New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -PropertyType "DWord" -Value 0 -Force | Out-Null
-}
+New-Item -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests" -Force | Out-Null
+New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests" -Name "value" -PropertyType "DWord" -Value 0 -Force | Out-Null
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Force | Out-Null
+New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -PropertyType "DWord" -Value 0 -Force | Out-Null
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Force | Out-Null
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -PropertyType "DWord" -Value 0 -Force | Out-Null
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Force | Out-Null
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowCortanaButton" -PropertyType "DWord" -Value 0 -Force | Out-Null
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Force | Out-Null
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoNewsAndInterests" -PropertyType "DWord" -Value 1 -Force | Out-Null
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Force | Out-Null
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "HideSCAMeetNow" -PropertyType "DWord" -Value 1 -Force | Out-Null
+New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Force | Out-Null
+New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -PropertyType "DWord" -Value 1 -Force | Out-Null
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Force | Out-Null
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -PropertyType "DWord" -Value 1 -Force | Out-Null
+New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Force | Out-Null
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -PropertyType "DWord" -Value 0 -Force | Out-Null
 
 Write-Host '[√] Completed'
