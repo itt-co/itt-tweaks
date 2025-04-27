@@ -1,11 +1,10 @@
 Write-Host '[i] This may take a few minutes'
-Add-Log -Message "[+] CHKDSK scan..."  -level "info"
+Write-Host "[+] CHKDSK scan..." 
 Chkdsk /scan
-Add-Log -Message "[+] System File Checker (SFC)..."   -level "info"
+Write-Host "[+] System File Checker (SFC)..."   
 sfc /scannow
-Add-Log -Message "[+] DISM RestoreHealth..."    -level "info"
+Write-Host "[+] DISM RestoreHealth..."   
 DISM /Online /Cleanup-Image /Restorehealth
-Add-Log -Message "[+] SFC again to verify repairs..."    -level "info"
+Write-Host "[+] SFC again to verify repairs..."   
 sfc /scannow
-Add-Log -Message "[√] System health check completed"     -level "info"
-
+Add-Log -Message "[√] System health check completed"    
