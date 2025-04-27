@@ -10,7 +10,7 @@ function Start-Spinner {
     $spinnerFrames = @('/', '-', '\', '|')
     $frameIndex = 0
 
-    $Action.Invoke()
+    #$Action.Invoke()
 
     while ($true) {
         $frame = $spinnerFrames[$frameIndex++ % $spinnerFrames.Count]
