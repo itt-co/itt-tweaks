@@ -41,5 +41,3 @@ Start-Spinner -Message 'SFC again to verify repairs.....'
 #sfc /scannow
 Start-Sleep -Seconds 2
 Write-Host "`r[√] SFC again completed"
-
-Write-Host '[√] System health check completed'
