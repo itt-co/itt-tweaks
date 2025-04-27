@@ -1,4 +1,4 @@
-Write-Host '[i] This may take a few minutes'
+Write-Host '[i] This may take a few minutes.'
 Write-Host '[+] CHKDSK scan...' 
 Chkdsk /scan
 Write-Host '[+] System File Checker (SFC)...' 
