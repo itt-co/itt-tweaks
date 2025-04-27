@@ -24,22 +24,22 @@ Write-Host '[i] This may take a few minutes'
 
 Start-Spinner -Message 'CHKDSK scan.....'
 #chkdsk /scan
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 2
 Write-Host "`r[√] CHKDSK scan completed"
 
 Start-Spinner -Message 'System File Checker (SFC).....'
 #sfc /scannow
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 2
 Write-Host "`r[√] System File Checker (SFC) completed"
 
 Start-Spinner -Message 'DISM RestoreHealth.....'
 #DISM /Online /Cleanup-Image /Restorehealth
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 2
 Write-Host "`r[√] DISM RestoreHealth completed"
 
 Start-Spinner -Message 'SFC again to verify repairs.....'
 #sfc /scannow
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 2
 Write-Host "`r[√] SFC again completed"
 
 Write-Host '[√] System health check completed'
