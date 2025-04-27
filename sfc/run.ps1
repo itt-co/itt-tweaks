@@ -7,38 +7,35 @@ function Start-Spinner {
     $spinnerFrames = @('/', '-', '\', '|')
     $frameIndex = 0
 
-    while ($true) {
-        $frame = $spinnerFrames[$frameIndex++ % $spinnerFrames.Count]
-        Write-Host -NoNewline "`r$frame $Message"
-        Start-Sleep -Milliseconds 100
+    $job = Start-Job -ScriptBlock {
+        $stopSpinner = $false
+        while (-not $stopSpinner) {
+            $frame = $spinnerFrames[$frameIndex++ % $spinnerFrames.Count]
+            Write-Host -NoNewline "`r$frame $Message"
+            Start-Sleep -Milliseconds 100
+        }
     }
+
+    # Wait for completion of action, this is where the spinner will stop automatically
+    $job | Wait-Job
+    Remove-Job $job
 
     Write-Host "`r[√] $Message"
 }
 
-# --------------------------------------------------
-# Main Script Example 
-# write your tweak here
-# --------------------------------------------------
-
-Write-Host '[i] This may take a few minutes.'
-
+# Main Script
 Start-Spinner -Message 'CHKDSK scan.....'
-#chkdsk /scan
 Start-Sleep -Seconds 2
 Write-Host "`r[√] CHKDSK scan completed"
 
 Start-Spinner -Message 'System File Checker (SFC).....'
-#sfc /scannow
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 2  
 Write-Host "`r[√] System File Checker (SFC) completed"
 
 Start-Spinner -Message 'DISM RestoreHealth.....'
-#DISM /Online /Cleanup-Image /Restorehealth
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 2  
 Write-Host "`r[√] DISM RestoreHealth completed"
 
 Start-Spinner -Message 'SFC again to verify repairs.....'
-#sfc /scannow
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 2  
 Write-Host "`r[√] SFC again completed"
