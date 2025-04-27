@@ -1,5 +1,9 @@
 $Registry = @(
     @{ Path = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search"; Name = "BingSearchEnabled"; Type = "DWord"; Value = 0 }
+    @{ Path = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo"; Name = "Enabled"; Type = "DWord"; Value = 0 },
+    @{ Path = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager"; Name = "SystemPaneSuggestionsEnabled"; Type = "DWord"; Value = 0 },
+    @{ Path = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager"; Name = "SoftLandingEnabled"; Type = "DWord"; Value = 0 },
+    @{ Path = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced"; Name = "ShowSyncProviderNotifications"; Type = "DWord"; Value = 0 }
 )
 
 foreach ($Item in $Registry) {
