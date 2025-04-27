@@ -24,6 +24,7 @@ function Start-Spinner {
 }
 
 # Main Script
+
 Start-Spinner -Message 'CHKDSK scan.....'
 Start-Sleep -Seconds 2
 Write-Host "`r[√] CHKDSK scan completed"
