@@ -7,8 +7,8 @@ $Registry = @(
 )
 
 foreach ($Item in $Registry) {
-    Write-Host "[+] Optmize $($Item.Name)"
     try {
+        Write-Host "[+] Optmize $($Item.Name)"
         if (-not (Test-Path $Item.Path)) {
             New-Item -Path $Item.Path -Force | Out-Null
         }
