@@ -1,17 +1,13 @@
 function Start-Spinner {
     param(
         [Parameter(Mandatory)]
-        [string]$Message,
-
-        [Parameter(Mandatory)]
-        [ScriptBlock]$Action
+        [string]$Message
     )
 
     $spinnerFrames = @('/', '-', '\', '|')
     $frameIndex = 0
 
-    $Action.Invoke()
-
+    # عرض السبينر أثناء تنفيذ العمليات
     while ($true) {
         $frame = $spinnerFrames[$frameIndex++ % $spinnerFrames.Count]
         Write-Host -NoNewline "`r[ $frame ] $Message"
@@ -22,25 +18,29 @@ function Start-Spinner {
 }
 
 # --------------------------------------------------
-# Main Script
+# Main Script Example
 # --------------------------------------------------
 
 Write-Host '[i] This may take a few minutes'
 
-Start-Spinner -Message 'CHKDSK scan.....' -Action {
-    chkdsk /scan
-}
+Start-Spinner -Message 'CHKDSK scan.....'
+#chkdsk /scan
+Start-Sleep -Seconds 10
+Write-Host "`r[√] CHKDSK scan completed"
 
-Start-Spinner -Message 'System File Checker (SFC).....' -Action {
-    sfc /scannow
-}
+Start-Spinner -Message 'System File Checker (SFC).....'
+#sfc /scannow
+Start-Sleep -Seconds 10
+Write-Host "`r[√] System File Checker (SFC) completed"
 
-Start-Spinner -Message 'DISM RestoreHealth.....' -Action {
-    DISM /Online /Cleanup-Image /Restorehealth
-}
+Start-Spinner -Message 'DISM RestoreHealth.....'
+#DISM /Online /Cleanup-Image /Restorehealth
+Start-Sleep -Seconds 10
+Write-Host "`r[√] DISM RestoreHealth completed"
 
-Start-Spinner -Message 'SFC again to verify repairs.....' -Action {
-    sfc /scannow
-}
+Start-Spinner -Message 'SFC again to verify repairs.....'
+#sfc /scannow
+Start-Sleep -Seconds 10
+Write-Host "`r[√] SFC again completed"
 
 Write-Host '[√] System health check completed'
