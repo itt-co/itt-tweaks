@@ -1,10 +1,8 @@
 Stop-Service -Name wuauserv -Force -ErrorAction SilentlyContinue
-
 Write-Host "[+] Clear Temp folder"
 Remove-Item -Path "$env:LOCALAPPDATA\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
 Write-Host "[+] Clear Prefetch folder"
-
 Remove-Item -Path "C:\Windows\Prefetch\*" -Recurse -Force -ErrorAction SilentlyContinue
 takeown /f C:\Windows\SoftwareDistribution /r /d y
 icacls C:\Windows\SoftwareDistribution /grant administrators:F /t
