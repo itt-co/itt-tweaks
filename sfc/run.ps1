@@ -7,7 +7,6 @@ function Start-Spinner {
     $spinnerFrames = @('/', '-', '\', '|')
     $frameIndex = 0
 
-    # عرض السبينر أثناء تنفيذ العمليات
     while ($true) {
         $frame = $spinnerFrames[$frameIndex++ % $spinnerFrames.Count]
         Write-Host -NoNewline "`r[ $frame ] $Message"
