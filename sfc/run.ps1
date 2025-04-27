@@ -9,7 +9,7 @@ function Start-Spinner {
 
     while ($true) {
         $frame = $spinnerFrames[$frameIndex++ % $spinnerFrames.Count]
-        Write-Host -NoNewline "`r[ $frame ] $Message"
+        Write-Host -NoNewline "`r$frame $Message"
         Start-Sleep -Milliseconds 100
     }
 
@@ -20,7 +20,7 @@ function Start-Spinner {
 # Main Script Example
 # --------------------------------------------------
 
-Write-Host '[i] This may take a few minutes'
+Write-Host '[i] This may take a few minutes.'
 
 Start-Spinner -Message 'CHKDSK scan.....'
 #chkdsk /scan
