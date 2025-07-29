@@ -85,8 +85,8 @@ $RegistryChanges = @(
 )
 
 foreach ($name in $AppxPackages) {
-    Write-Host "[i] Attempting to remove $name"
     try {
+        Write-Host "[i] Attempting to remove $name"
         Get-AppxPackage -Name $name | Remove-AppxPackage  -ErrorAction SilentlyContinue
         Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$name*" | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
     } catch {
@@ -98,5 +98,3 @@ foreach ($Reg in $RegistryChanges) {
     Write-Host "[+] Modifying registry: $($Reg.Path) - $($Reg.Name)"
     Set-ItemProperty -Path $Reg.Path -Name $Reg.Name -Value $Reg.Value -Type $Reg.Type
 }
-
-Write-Host '[i] AppxPackage removal completed'
