@@ -1,8 +1,8 @@
-param(
-    [string[]]$RegistryPaths = @(
-        "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR",
-        "HKCU:\SOFTWARE\Microsoft\GameBar"
-    )
+if (-not $Value) { $Value = 0 }
+
+$RegistryPaths = @(
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR",
+    "HKCU:\SOFTWARE\Microsoft\GameBar"
 )
 
 try {
@@ -12,8 +12,8 @@ try {
             New-Item -Path $path -Force | Out-Null
         }
 
-        Write-Host "[Info] Optimizing $path" -ForegroundColor Cyan
-        Set-ItemProperty -Path $path -Name "AutoGameModeEnabled" -Value 0 -Type DWord -Force -ErrorAction Stop
+        Write-Host "[Info] Optimizing $path (AutoGameModeEnabled = $Value)" -ForegroundColor Cyan
+        Set-ItemProperty -Path $path -Name "AutoGameModeEnabled" -Value $Value -Type DWord -Force -ErrorAction Stop
     }
 }
 catch {
