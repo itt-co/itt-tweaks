@@ -6,13 +6,21 @@ $Registry = @(
 )
 
 foreach ($Item in $Registry) {
-    Write-Host "[Info] Optimizing $($Item.Path)\$($Item.Name)" -ForegroundColor Cyan
     try {
+    
+        if (!(Test-Path 'HKU:\')) {
+            New-PSDrive -PSProvider Registry -Name HKU -Root HKEY_USERS | Out-Null
+        }
+
         if (-not (Test-Path -Path $Item.Path)) {
             Write-Host "[!] '$($Item.Path)' does not exist. Creating it..." -ForegroundColor Yellow
             New-Item -Path $Item.Path -Force | Out-Null
         }
+        
+        Write-Host "[Info] Optimizing $($Item.Path)\$($Item.Name)" -ForegroundColor Cyan
+        
         Set-ItemProperty -Path $Item.Path -Name $Item.Name -Value $Value -Type $Item.Type -Force -ErrorAction Stop
+        
     } catch {
         Write-Host "[x] Failed to apply $($Item.Name): $($_.Exception.Message)" -ForegroundColor Red
     }
