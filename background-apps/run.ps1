@@ -1,16 +1,19 @@
+if (-not $Value) { $Value = 0 }
+
 $Registry = @(
-    @{ Path = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager"; Name = "GlobalUserDisabled"; Type = "DWord"; Value = 1 },
-    @{ Path = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search"; Name = "BackgroundAppGlobalToggle"; Type = "DWord"; Value = 0 }
+    @{ Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"; Name = "GlobalUserDisabled"; Type = "DWord" },
+    @{ Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search"; Name = "BackgroundAppGlobalToggle"; Type = "DWord" }
 )
 
 foreach ($Item in $Registry) {
-    Write-Host "[+] Optmize $($Item.Name)"
+    Write-Host "[Info] Optimizing $($Item.Path)\$($Item.Name) (Value = $Value)" -ForegroundColor Cyan
     try {
-        if (-not (Test-Path $Item.Path)) {
+        if (-not (Test-Path -Path $Item.Path)) {
+            Write-Host "[!] '$($Item.Path)' does not exist. Creating it..." -ForegroundColor Yellow
             New-Item -Path $Item.Path -Force | Out-Null
         }
-        Set-ItemProperty -Path $Item.Path -Name $Item.Name -Value $Item.Value -Type $Item.Type
+        Set-ItemProperty -Path $Item.Path -Name $Item.Name -Value $Value -Type $Item.Type -Force -ErrorAction Stop
     } catch {
-        Write-Host "[x] Failed to apply $($Item.Name): $_"
+        Write-Host "[x] Failed to apply $($Item.Name): $($_.Exception.Message)" -ForegroundColor Red
     }
 }
