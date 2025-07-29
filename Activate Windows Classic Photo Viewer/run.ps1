@@ -21,7 +21,7 @@ foreach ($item in $Registry) {
             New-ItemProperty -Path $item.Path -Name $item.Name -PropertyType String -Value $item.Value -Force | Out-Null
         }
 
-        Write-Host "[✓] Set $($item.Name)" -ForegroundColor Green
+        Write-Host "[INFO] Set $($item.Name)" -ForegroundColor Green
     } catch {
         Write-Host "[!] Failed to set $($item.Name): $($_.Exception.Message)" -ForegroundColor Red
     }
