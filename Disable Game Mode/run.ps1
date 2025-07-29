@@ -10,5 +10,5 @@ try {
     Set-ItemProperty -Path $PathHKCU -Name "AutoGameModeEnabled" -Value 0 -Type DWord -Force -ErrorAction Stop
 }
 catch {
-    Write-Host "[Error] $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "$($_.Exception.Message)" -ForegroundColor Red
 }
