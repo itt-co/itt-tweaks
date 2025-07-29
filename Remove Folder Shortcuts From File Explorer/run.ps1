@@ -27,9 +27,9 @@ try {
         if ($Item.Remove -eq $true) {
             if (Test-Path $Item.Path) {
                 Remove-Item -Path $Item.Path -Force -Recurse
-                Write-Host "[✓] Removed $($Item.Path)"
+                Write-Host "[INFO] Removed $($Item.Path)"
             } else {
-                Write-Host "[✓] Not Found (Already Removed) $($Item.Path)"
+                Write-Host "[INFO] Not Found (Already Removed) $($Item.Path)"
             }
         } else {
             if (-not (Test-Path $Item.Path)) {
@@ -37,7 +37,7 @@ try {
             }
 
             New-ItemProperty -Path $Item.Path -Name $Item.Name -PropertyType $Item.Type -Value $Item.Value -Force | Out-Null
-            Write-Host "[✓] Set $($Item.Path)\$($Item.Name) = $($Item.Value)"
+            Write-Host "[INFO] Set $($Item.Path)\$($Item.Name) = $($Item.Value)"
         }
     }
 } catch {
