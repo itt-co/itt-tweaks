@@ -1,4 +1,5 @@
-# Check for administrator privileges
+Param($path = "HKCU:\Control Panel\Accessibility\StickyKeys",)
+
 If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
     [Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Host "This script requires administrator privileges." -ForegroundColor Red
@@ -7,6 +8,5 @@ If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Exit
 }
 
-# Disable Sticky Keys
-Write-Host "-- Disabling Sticky Keys" -ForegroundColor Cyan
+Write-Host "Optimizing  $path" -ForegroundColor Cyan
 Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\StickyKeys" -Name "Flags" -Value "58"
