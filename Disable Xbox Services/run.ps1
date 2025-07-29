@@ -37,6 +37,6 @@ foreach ($item in $RegistrySettings) {
         $target = if ($item.Name -eq "") { "(Default)" } else { $item.Name }
         Write-Host "[INFO] Set $target to $($item.Value) in $($item.Path)" -ForegroundColor Cyan
     } catch {
-        Write-Host "[X] Error setting $($item.Name) in $($item.Path): $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "[!] Error setting $($item.Name) in $($item.Path): $($_.Exception.Message)" -ForegroundColor Red
     }
 }
