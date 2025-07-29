@@ -7,11 +7,6 @@ $Registry = @(
 
 foreach ($Item in $Registry) {
     try {
-    
-        if (!(Test-Path 'HKU:\')) {
-            New-PSDrive -PSProvider Registry -Name HKU -Root HKEY_USERS | Out-Null
-        }
-
         if (-not (Test-Path -Path $Item.Path)) {
             Write-Host "[!] '$($Item.Path)' does not exist. Creating it..." -ForegroundColor Yellow
             New-Item -Path $Item.Path -Force | Out-Null
