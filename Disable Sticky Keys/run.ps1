@@ -14,6 +14,3 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\StickyKeys" -Name "Fla
 # Restart Explorer
 Stop-Process -Name explorer -Force
 Start-Process explorer.exe
-
-# Exit script
-Exit
