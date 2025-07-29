@@ -21,5 +21,5 @@ try {
     }
 }
 catch {
-    Write-Host "[x] Error: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "[!] Error: $($_.Exception.Message)" -ForegroundColor Red
 }
