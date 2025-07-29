@@ -6,7 +6,7 @@ $Registry = @(
 )
 
 foreach ($Item in $Registry) {
-    Write-Host "[Info] Optimizing $($Item.Path)\$($Item.Name) (Value = $Value)" -ForegroundColor Cyan
+    Write-Host "[Info] Optimizing $($Item.Path)\$($Item.Name)" -ForegroundColor Cyan
     try {
         if (-not (Test-Path -Path $Item.Path)) {
             Write-Host "[!] '$($Item.Path)' does not exist. Creating it..." -ForegroundColor Yellow
