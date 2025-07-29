@@ -12,7 +12,7 @@ foreach ($Item in $Registry) {
             New-Item -Path $Item.Path -Force | Out-Null
         }
         
-        Write-Host "[Info] Optimizing $($Item.Path)\$($Item.Name)" -ForegroundColor Cyan
+        Write-Host "[INFO] Optimizing $($Item.Path)\$($Item.Name)" -ForegroundColor Cyan
         
         Set-ItemProperty -Path $Item.Path -Name $Item.Name -Value $Value -Type $Item.Type -Force -ErrorAction Stop
         
