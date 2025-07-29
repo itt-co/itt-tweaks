@@ -14,7 +14,7 @@ foreach ($svc in $Services) {
     try {
         $service = Get-Service -Name $svc.Name -ErrorAction Stop
         Set-Service -Name $svc.Name -StartupType $svc.StartupType
-        Write-Host "[✓] Disabled service: $($svc.Name)"
+        Write-Host "[INFO] Disabled service: $($svc.Name)"
     } catch {
         Write-Host "[!] Error modifying service '$($svc.Name)': $($_.Exception.Message)" -ForegroundColor Red
     }
