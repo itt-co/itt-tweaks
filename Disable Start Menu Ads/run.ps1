@@ -1,25 +1,21 @@
 $Registry = @(
-    @{ Path = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search"; Name = "BingSearchEnabled"; Type = "DWord"; Value = 0 }
-    @{ Path = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo"; Name = "Enabled"; Type = "DWord"; Value = 0 },
-    @{ Path = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager"; Name = "SystemPaneSuggestionsEnabled"; Type = "DWord"; Value = 0 },
-    @{ Path = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager"; Name = "SoftLandingEnabled"; Type = "DWord"; Value = 0 },
-    @{ Path = "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced"; Name = "ShowSyncProviderNotifications"; Type = "DWord"; Value = 0 }
+    @{ Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search"; Name = "BingSearchEnabled"; Type = "DWord"; Value = 0 },
+    @{ Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo"; Name = "Enabled"; Type = "DWord"; Value = 0 },
+    @{ Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"; Name = "SystemPaneSuggestionsEnabled"; Type = "DWord"; Value = 0 },
+    @{ Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"; Name = "SoftLandingEnabled"; Type = "DWord"; Value = 0 },
+    @{ Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced"; Name = "ShowSyncProviderNotifications"; Type = "DWord"; Value = 0 }
 )
 
-foreach ($Item in $Registry) {
-    try {
-        Write-Host "[+] Optmize $($Item.Name)"
+try {
+    foreach ($Item in $Registry) {
         if (-not (Test-Path $Item.Path)) {
             New-Item -Path $Item.Path -Force | Out-Null
         }
-        Set-ItemProperty -Path $Item.Path -Name $Item.Name -Value $Item.Value -Type $Item.Type
-    } catch {
-        Write-Host "[x] Failed to apply $($Item.Name): $_"
+
+        New-ItemProperty -Path $Item.Path -Name $Item.Name -PropertyType $Item.Type -Value $Item.Value -Force | Out-Null
+        Write-Host "[✓] Set $($Item.Name) = $($Item.Value) → $($Item.Path)" -ForegroundColor Green
     }
 }
-Write-Host "[+] Restart explorer."
-Stop-Process -Name explorer -Force
-Start-Sleep -Seconds 1
-if (-not (Get-Process -Name explorer -ErrorAction SilentlyContinue)) {
-    Start-Process explorer.exe -Verb RunAs
+catch {
+    Write-Host "$($_.Exception.Message)" -ForegroundColor Red
 }
