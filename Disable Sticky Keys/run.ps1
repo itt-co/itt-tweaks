@@ -10,7 +10,3 @@ If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 # Disable Sticky Keys
 Write-Host "-- Disabling Sticky Keys" -ForegroundColor Cyan
 Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\StickyKeys" -Name "Flags" -Value "58"
-
-# Restart Explorer
-Stop-Process -Name explorer -Force
-Start-Process explorer.exe
