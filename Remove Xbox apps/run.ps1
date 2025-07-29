@@ -9,8 +9,8 @@ $AppxPackages = @(
     "Microsoft.XboxSpeechToTextOverlay"
 )
 foreach ($name in $AppxPackages) {
-    Write-Host "[i] Attempting to remove $name"
     try {
+        Write-Host "[INFO] Attempting to remove $name"
         Get-AppxPackage -Name $name | Remove-AppxPackage  -ErrorAction SilentlyContinue
         Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$name*" | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
     } catch {
