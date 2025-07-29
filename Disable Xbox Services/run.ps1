@@ -35,7 +35,7 @@ foreach ($item in $RegistrySettings) {
         # Even if the name is empty, this will still write to default
         Set-ItemProperty -Path $item.Path -Name $item.Name -Value $item.Value -Type $item.Type -Force
         $target = if ($item.Name -eq "") { "(Default)" } else { $item.Name }
-        Write-Host "[✓] Set $target to $($item.Value) in $($item.Path)" -ForegroundColor Cyan
+        Write-Host "[INFO] Set $target to $($item.Value) in $($item.Path)" -ForegroundColor Cyan
     } catch {
         Write-Host "[X] Error setting $($item.Name) in $($item.Path): $($_.Exception.Message)" -ForegroundColor Red
     }
