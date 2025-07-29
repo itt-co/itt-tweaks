@@ -1,8 +1,8 @@
 if (-not $Value) { $Value = 0 }
 
 $Registry = @(
-    @{ Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"; Name = "GlobalUserDisabled"; Type = "DWord" },
-    @{ Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search"; Name = "BackgroundAppGlobalToggle"; Type = "DWord" }
+    @{ Path = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications"; Name = "GlobalUserDisabled"; Type = "DWord" },
+    @{ Path = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Search"; Name = "BackgroundAppGlobalToggle"; Type = "DWord" }
 )
 
 foreach ($Item in $Registry) {
