@@ -4,7 +4,7 @@ foreach ($file in $files)
 {
     if (Test-Path $file)
     {
-        Write-Host "[INFO] Renameing $file..."
+        Write-Host "[INFO] Renameing $file..."  -ForegroundColor Cyan
         takeown /f $file
         ICACLS $file /grant administrators:F
         timeout /T 2 /NOBREAK > $null
