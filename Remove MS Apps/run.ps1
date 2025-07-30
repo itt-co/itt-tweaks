@@ -98,3 +98,17 @@ foreach ($Reg in $RegistryChanges) {
     Write-Host "[+] Modifying registry: $($Reg.Path) - $($Reg.Name)"
     Set-ItemProperty -Path $Reg.Path -Name $Reg.Name -Value $Reg.Value -Type $Reg.Type
 }
+
+$registryPath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+if (-not (Test-Path $registryPath)) {
+    New-Item -Path $registryPath -Force | Out-Null
+}
+Write-Host "[INFO] Optimizing $registryPath" -ForegroundColor Cyan
+Set-ItemProperty -Path $registryPath -Name "NoStartMenuMorePrograms" -Value 2 -Type DWord
+
+$registryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+if (-not (Test-Path $registryPath)) {
+    New-Item -Path $registryPath -Force | Out-Null
+}
+Write-Host "[INFO] Optimizing $registryPath" -ForegroundColor Cyan
+Set-ItemProperty -Path $registryPath -Name "NoStartMenuMorePrograms" -Value 2 -Type DWord
