@@ -14,6 +14,7 @@ try {
 
         New-ItemProperty -Path $Item.Path -Name $Item.Name -PropertyType $Item.Type -Value $Item.Value -Force | Out-Null
         Write-Host "[INFO] Set $($Item.Name) = $($Item.Value) > $($Item.Path)" -ForegroundColor Cyan
+        Start-Sleep -Seconds 8
     }
 }
 catch {
