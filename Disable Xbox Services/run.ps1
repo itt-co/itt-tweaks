@@ -29,7 +29,7 @@ foreach ($item in $RegistrySettings) {
     try {
         if (-not (Test-Path $item.Path)) {
             New-Item -Path $item.Path -Force | Out-Null
-            Write-Host "[+] Created path: $($item.Path)" -ForegroundColor DarkGray
+            Write-Host "[INFO] Created path: $($item.Path)" -ForegroundColor Cyan
         }
 
         # Even if the name is empty, this will still write to default
