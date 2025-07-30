@@ -1,32 +1,22 @@
-# PowerShell Script to Set Registry Keys for Windows Photo Viewer Associations
+# Create base registry keys
+New-Item -Path "HKCR:\Applications\photoviewer.dll\shell\open\command" -Force
+New-Item -Path "HKCR:\Applications\photoviewer.dll\shell\open\DropTarget" -Force
+New-Item -Path "HKCR:\Applications\photoviewer.dll\shell\print\command" -Force
+New-Item -Path "HKCR:\Applications\photoviewer.dll\shell\print\DropTarget" -Force
 
-$Registry = @(
-    @{ Path = "HKLM:\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations"; Name = ".jpg"; Type = "String"; Value = "PhotoViewer.FileAssoc.Tiff" },
-    @{ Path = "HKLM:\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations"; Name = ".jpeg"; Type = "String"; Value = "PhotoViewer.FileAssoc.Tiff" },
-    @{ Path = "HKLM:\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations"; Name = ".png"; Type = "String"; Value = "PhotoViewer.FileAssoc.Tiff" },
-    @{ Path = "HKLM:\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations"; Name = ".bmp"; Type = "String"; Value = "PhotoViewer.FileAssoc.Tiff" },
-    @{ Path = "HKLM:\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations"; Name = ".gif"; Type = "String"; Value = "PhotoViewer.FileAssoc.Tiff" },
-    @{ Path = "HKLM:\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities"; Name = "ApplicationIcon"; Type = "String"; Value = "C:\Program Files (x86)\Windows Photo Viewer\photoviewer.dll" },
-    @{ Path = "HKLM:\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities"; Name = "ApplicationName"; Type = "String"; Value = "Windows Photo Viewer" }
-)
+# Set MuiVerb value
+Set-ItemProperty -Path "HKCR:\Applications\photoviewer.dll\shell\open" -Name "MuiVerb" -Value "@photoviewer.dll,-3043"
 
-foreach ($item in $Registry) {
+# Set open command
+$openCommand = '%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1'
+Set-ItemProperty -Path "HKCR:\Applications\photoviewer.dll\shell\open\command" -Name "(default)" -Value $openCommand -Type ExpandString
 
-    $path = $item.Path
-    $name = $item.Name
-    $type = $item.Type
-    $value = $item.Value
+# Set DropTarget CLSID for open
+Set-ItemProperty -Path "HKCR:\Applications\photoviewer.dll\shell\open\DropTarget" -Name "Clsid" -Value "{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}"
 
-    try {
-        # Create the key if it doesn't exist
-        if (-not (Test-Path $path)) {
-            New-Item -Path $path -Force | Out-Null
-        }
+# Set print command
+$printCommand = '%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1'
+Set-ItemProperty -Path "HKCR:\Applications\photoviewer.dll\shell\print\command" -Name "(default)" -Value $printCommand -Type ExpandString
 
-        # Set the registry value
-        New-ItemProperty -Path $path -Name $name -Value $value -PropertyType $type -Force | Out-Null
-        Write-Host "Successfully set $name in $path"
-    } catch {
-        Write-Warning "Failed to set $name in $path: $_"
-    }
-}
+# Set DropTarget CLSID for print
+Set-ItemProperty -Path "HKCR:\Applications\photoviewer.dll\shell\print\DropTarget" -Name "Clsid" -Value "{60fd46de-f830-4894-a628-6fa81bc0190d}"
