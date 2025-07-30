@@ -1,3 +1,5 @@
+Disable-MMAgent -MemoryCompression | Out-Null
+
 $RegistrySettings = @(
     @{ Path = "HKCU:\SOFTWARE\Microsoft\GameBar"; Name = "AutoGameModeEnabled"; Type = "DWord"; Value = 0 }
     @{ Path = "HKCU:\SOFTWARE\Microsoft\GameBar"; Name = "AllowAutoGameMode"; Type = "DWord"; Value = 0 }
