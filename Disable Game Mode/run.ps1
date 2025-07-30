@@ -8,7 +8,7 @@ $RegistryPaths = @(
 try {
     foreach ($path in $RegistryPaths) {
         if (-not (Test-Path -Path $path)) {
-            Write-Host "'$path' does not exist. Creating it..." -ForegroundColor Yellow
+            Write-Host "'$path' does not exist. Creating it..." -ForegroundColor green
             New-Item -Path $path -Force | Out-Null
         }
 
