@@ -12,7 +12,7 @@ try {
             New-Item -Path $path -Force | Out-Null
         }
 
-        Write-Host "[INFO] Optimizing $path (AutoGameModeEnabled = $Value)" -ForegroundColor green
+        Write-Host "[INFO] Optimizing $path (AutoGameModeEnabled = $Value)" -ForegroundColor Cyan
         Set-ItemProperty -Path $path -Name "AutoGameModeEnabled" -Value $Value -Type DWord -Force -ErrorAction Stop
     }
 }
