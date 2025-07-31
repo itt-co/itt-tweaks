@@ -2,5 +2,5 @@ $registryPath = "HKLM:\System\CurrentControlSet\Control\Session Manager\Memory M
 if (-not (Test-Path $registryPath)) {
     New-Item -Path $registryPath -Force | Out-Null
 }
-Write-Host "[INFO] Optimizing $registryPath" -ForegroundColor Cyan
+Write-Host "[info] Optimizing $registryPath" -ForegroundColor Cyan
 Set-ItemProperty -Path $registryPath -Name "LargeSystemCache" -Value 1 -Type DWord
