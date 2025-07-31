@@ -1,4 +1,4 @@
-Write-Host "[INFO] Disabling screen and standby timeout (AC/DC)" -ForegroundColor Cyan
+Write-Host "[info] Disabling screen and standby timeout (AC/DC)" -ForegroundColor Cyan
 powercfg /X monitor-timeout-ac 0
 powercfg /X monitor-timeout-dc 0
 powercfg /X standby-timeout-ac 0
