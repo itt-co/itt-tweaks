@@ -1,8 +1,8 @@
 Stop-Service -Name wuauserv -Force -ErrorAction SilentlyContinue
-Write-Host "[+] Clear Temp folder"
+Write-Host "[info] Clear Temp folder"
 Remove-Item -Path "$env:LOCALAPPDATA\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
-Write-Host "[+] Clear Prefetch folder"
+Write-Host "[info] Clear Prefetch folder"
 Remove-Item -Path "C:\Windows\Prefetch\*" -Recurse -Force -ErrorAction SilentlyContinue
 takeown /f C:\Windows\SoftwareDistribution /r /d y
 icacls C:\Windows\SoftwareDistribution /grant administrators:F /t
@@ -14,7 +14,7 @@ Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 wevtutil.exe clear-log "Microsoft-Windows-WindowsUpdateClient/Operational"
 Remove-Item -Path "C:\Windows\Installer\$PatchCache$\*" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "$env:USERPROFILE\Downloads\*" -Recurse -Force -ErrorAction SilentlyContinue
-Write-Host "[+] Clear Edge Cache"
+Write-Host "[info] Clear Edge Cache"
 Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Cache\*" -Recurse -Force -ErrorAction SilentlyContinue
 Start-Service -Name wuauserv -ErrorAction SilentlyContinue
