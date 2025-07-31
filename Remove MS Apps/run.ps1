@@ -86,7 +86,7 @@ $RegistryChanges = @(
 
 foreach ($name in $AppxPackages) {
     try {
-        Write-Host "[INFO] Attempting to remove $name" -ForegroundColor Cyan
+        Write-Host "[info] Attempting to remove $name" -ForegroundColor Cyan
         Get-AppxPackage -Name $name | Remove-AppxPackage  -ErrorAction SilentlyContinue
         Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$name*" | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
     } catch {
@@ -95,7 +95,7 @@ foreach ($name in $AppxPackages) {
 }
 
 foreach ($Reg in $RegistryChanges) {
-    Write-Host "[+] Modifying registry: $($Reg.Path) - $($Reg.Name)"
+    Write-Host "[info] Modifying registry: $($Reg.Path) - $($Reg.Name)"
     Set-ItemProperty -Path $Reg.Path -Name $Reg.Name -Value $Reg.Value -Type $Reg.Type
 }
 
@@ -103,12 +103,12 @@ $registryPath = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explor
 if (-not (Test-Path $registryPath)) {
     New-Item -Path $registryPath -Force | Out-Null
 }
-Write-Host "[INFO] Optimizing $registryPath" -ForegroundColor Cyan
+Write-Host "[info] Optimizing $registryPath" -ForegroundColor Cyan
 Set-ItemProperty -Path $registryPath -Name "NoStartMenuMorePrograms" -Value 2 -Type DWord
 
 $registryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer"
 if (-not (Test-Path $registryPath)) {
     New-Item -Path $registryPath -Force | Out-Null
 }
-Write-Host "[INFO] Optimizing $registryPath" -ForegroundColor Cyan
+Write-Host "[info] Optimizing $registryPath" -ForegroundColor Cyan
 Set-ItemProperty -Path $registryPath -Name "NoStartMenuMorePrograms" -Value 2 -Type DWord
