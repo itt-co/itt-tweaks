@@ -14,6 +14,6 @@ foreach ($Item in $Registry) {
 
         Set-ItemProperty -Path $Item.Path -Name $Item.Name -Value $Item.Value -Type $Item.Type -Force -ErrorAction Stop
     } catch {
-        Write-Host "[x] Failed to apply $($Item.Name): $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "[!] Failed to apply $($Item.Name): $($_.Exception.Message)" -ForegroundColor Red
     }
 }
