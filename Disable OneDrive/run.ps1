@@ -2,11 +2,11 @@ $registryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive"
 if (-not (Test-Path $registryPath)) {
     New-Item -Path $registryPath -Force | Out-Null
 }
-Write-Host "[INFO] Optimizing $registryPath" -ForegroundColor Cyan
+Write-Host "[info] Optimizing $registryPath" -ForegroundColor Cyan
 Set-ItemProperty -Path $registryPath -Name "DisableFileSyncNGSC" -Value 1 -Type DWord
 
 $registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
 if (Test-Path $registryPath) {
-    Write-Host "[INFO] Removing OneDrive autorun entry from $registryPath" -ForegroundColor Cyan
+    Write-Host "[info] Removing OneDrive autorun entry from $registryPath" -ForegroundColor Cyan
     Remove-ItemProperty -Path $registryPath -Name "OneDrive" -ErrorAction SilentlyContinue
 }
