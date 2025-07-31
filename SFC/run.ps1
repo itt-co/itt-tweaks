@@ -7,4 +7,4 @@ Write-Host "[info] DISM RestoreHealth..." -ForegroundColor Cyan
 DISM /Online /Cleanup-Image /Restorehealth
 Write-Host "[info] SFC again to verify repairs..." -ForegroundColor Cyan  
 sfc /scannow
-Add-Log -Message "[INFO] System health check completed" -ForegroundColor Cyan
+Add-Log -Message "[info] System health check completed" -ForegroundColor Cyan
