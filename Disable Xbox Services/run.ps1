@@ -31,13 +31,13 @@ foreach ($item in $RegistrySettings) {
     try {
         if (-not (Test-Path $item.Path)) {
             New-Item -Path $item.Path -Force | Out-Null
-            Write-Host "[info] Created path: $($item.Path)" -ForegroundColor Cyan
+            Write-Host "[i] Created path: $($item.Path)" -ForegroundColor Cyan
         }
 
         # Even if the name is empty, this will still write to default
         Set-ItemProperty -Path $item.Path -Name $item.Name -Value $item.Value -Type $item.Type -Force
         $target = if ($item.Name -eq "") { "(Default)" } else { $item.Name }
-        Write-Host "[info] Set $target to $($item.Value) in $($item.Path)" -ForegroundColor Cyan
+        Write-Host "[i] Set $target to $($item.Value) in $($item.Path)" -ForegroundColor Cyan
     } catch {
         Write-Host "[!] Error setting $($item.Name) in $($item.Path): $($_.Exception.Message)" -ForegroundColor Red
     }

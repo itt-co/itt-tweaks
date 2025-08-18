@@ -1,4 +1,4 @@
-Write-Host "[info] Renaming computer and local user..." -ForegroundColor Cyan
+Write-Host "[i] Renaming computer and local user..." -ForegroundColor Cyan
 $currentUsername = $env:USERNAME
 try {
     Rename-Computer -NewName 'Unknown' -Force -ErrorAction Stop

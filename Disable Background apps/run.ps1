@@ -6,11 +6,11 @@ $Registry = @(
 foreach ($Item in $Registry) {
     try {
         if (-not (Test-Path -Path $Item.Path)) {
-            Write-Host "[info] '$($Item.Path)' does not exist. Creating it..." -ForegroundColor Yellow
+            Write-Host "[i] '$($Item.Path)' does not exist. Creating it..." -ForegroundColor Yellow
             New-Item -Path $Item.Path -Force | Out-Null
         }
 
-        Write-Host "[info] Optimizing $($Item.Path)\$($Item.Name)" -ForegroundColor Cyan
+        Write-Host "[i] Optimizing $($Item.Path)\$($Item.Name)" -ForegroundColor Cyan
 
         Set-ItemProperty -Path $Item.Path -Name $Item.Name -Value $Item.Value -Type $Item.Type -Force -ErrorAction Stop
     } catch {

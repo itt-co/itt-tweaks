@@ -8,11 +8,11 @@ $RegistryPaths = @(
 try {
     foreach ($path in $RegistryPaths) {
         if (-not (Test-Path -Path $path)) {
-            Write-Host "[info] '$path' does not exist. Creating it..."
+            Write-Host "[i] '$path' does not exist. Creating it..."
             New-Item -Path $path -Force | Out-Null
         }
 
-        Write-Host "[info] Optimizing $path (AutoGameModeEnabled = $Value)" -ForegroundColor Cyan
+        Write-Host "[i] Optimizing $path (AutoGameModeEnabled = $Value)" -ForegroundColor Cyan
         Set-ItemProperty -Path $path -Name "AutoGameModeEnabled" -Value $Value -Type DWord -Force -ErrorAction Stop
     }
 }

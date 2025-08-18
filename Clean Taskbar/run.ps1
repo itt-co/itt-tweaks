@@ -17,10 +17,10 @@ try {
         }
 
         New-ItemProperty -Path $Item.Path -Name $Item.Name -PropertyType $Item.Type -Value $Item.Value -Force | Out-Null
-        Write-Host "[info] Set $($Item.Name) = $($Item.Value) > $($Item.Path)" -ForegroundColor Cyan
+        Write-Host "[i] Set $($Item.Name) = $($Item.Value) > $($Item.Path)" -ForegroundColor Cyan
     }
 
-    Write-Host "[info] Restarting explorer." -ForegroundColor Cyan
+    Write-Host "[i] Restarting explorer." -ForegroundColor Cyan
     Stop-Process -processName: Explorer -Force
     Start-Sleep -Seconds 1
     if (-not (Get-Process -processName: Explorer)) {
